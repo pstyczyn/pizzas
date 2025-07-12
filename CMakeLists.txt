@@ -25,9 +25,6 @@ target_link_libraries(${PROJECT_NAME} pthread)
 
 
 enable_testing()
-add_executable(tests test/PizzeriaTest.cpp test/test_main.cpp)
-add_test(NAME tests COMMAND tests)
-target_compile_options(tests PRIVATE ${FLAGS})
-target_link_libraries(tests test/PizzeriaTest GTest:gtest_main)
+add_executable(PizzeriaTest test/PizzeriaTest.cpp)
 include(GoogleTest)
 gtest_discover_tests(test/PizzeriaTest.cpp)
