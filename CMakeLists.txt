@@ -4,6 +4,7 @@ project(Pizzas)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -22,8 +23,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 target_link_libraries(${PROJECT_NAME} pthread)
 
-
-add_executable(${PROJECT_NAME}-ut test/PizzeriaTest.cpp test/test_main.cpp)
-target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})
+add_executable(${PROJECT_NAME}-test test/PizzeriaTest.cpp test/test_main.cpp)
+target_compile_options(${PROJECT_NAME}-test PRIVATE ${FLAGS})
 
 enable_testing()
+target_link_libraries(${PROJECT_NAME}-test GTest:gtest_main)
+include(GoogleTest)
+gtest_discover_tests(test/PizzeriaTest.cpp)
