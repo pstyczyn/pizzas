@@ -23,8 +23,13 @@ target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 target_link_libraries(${PROJECT_NAME} pthread)
 
-add_executable(${PROJECT_NAME}-test test/PizzeriaTest.cpp test/test_main.cpp)
-target_compile_options(${PROJECT_NAME}-test PRIVATE ${FLAGS})
+add_executable(${PROJECT_NAME}-tests test/PizzeriaTest.cpp test/test_main.cpp)
+target_compile_options(${PROJECT_NAME}-tests PRIVATE ${FLAGS})
+
+enable_testing()
+target_link_libraries(${PROJECT_NAME}-tests GTest:gtest_main)
+include(GoogleTest)
+gtest_discover_tests(test/PizzeriaTest.cpp)
 
 enable_testing()
 target_link_libraries(${PROJECT_NAME}-test GTest:gtest_main)
